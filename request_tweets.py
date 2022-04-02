@@ -1,17 +1,35 @@
 import tweepy
 import os
-#api key Iiwmn8OaXO2SroZyhADCqQFCH
-#api secret j3e37pZ8GNpG94F3L4wL8LxiB5NYFjQcicyzAInlb6UHuYd6qQ
-#bearer token AAAAAAAAAAAAAAAAAAAAAO42bAEAAAAAOVTkiHTGCVCY5WI557PXbwq7UQ8%3D9vZmiMI98s6tjBRDGWs7GqrEwloYXeC8gl8Id5kmb8U1rynI9e
+import pandas
+import csv
 
-auth = tweepy.OAuth1UserHandler(
-   "Iiwmn8OaXO2SroZyhADCqQFCH", "j3e37pZ8GNpG94F3L4wL8LxiB5NYFjQcicyzAInlb6UHuYd6qQ"
-)
+# auth = tweepy.OAuth1UserHandler(
+#    "Iiwmn8OaXO2SroZyhADCqQFCH", "j3e37pZ8GNpG94F3L4wL8LxiB5NYFjQcicyzAInlb6UHuYd6qQ"
+# )
 
 client = tweepy.Client("AAAAAAAAAAAAAAAAAAAAAO42bAEAAAAAOVTkiHTGCVCY5WI557PXbwq7UQ8%3D9vZmiMI98s6tjBRDGWs7GqrEwloYXeC8gl8Id5kmb8U1rynI9e")
 
-tweets = client.get_tweets(['1333156800926015488'])
-print(tweets.data[0])
-
 files = os.listdir('tweetid')
 print(files)
+
+with open('tweets.csv', "w") as f:
+    writer = csv.writer(f)
+    header = ['TweetID', 'Body', 'Likes', 'Retweets']
+    writer.writerow(header)
+    for file in files:
+        #iterate over every tweet in file (can use pandas) and only include tweets in english
+        pd = pandas.read_csv(file)
+        data = pd.DataFrame(csv)
+        tweets = data.loc[data['language'] == 'en']
+
+        # look up tweet in tweets
+
+        # write tweet id, contents, and likes and retweets
+        # remove any commas from contents
+        writer.writerow(data)
+
+        # tweet_data = client.get_tweets()
+        # print(tweet_data.data[0])
+
+
+
