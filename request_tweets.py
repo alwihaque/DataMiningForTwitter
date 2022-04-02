@@ -37,6 +37,6 @@ with open('tweets.csv', "w") as f:
             # tweet_data = client.get_tweets()
             # print(tweet_data.data[0])
 
-#parse strings to eliminate punctuation,
-def string_parse():
-    return
+#parse strings to eliminate punctuation and emojis
+def string_parse(st):
+    return st
