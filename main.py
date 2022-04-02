@@ -6,6 +6,7 @@ auth = tweepy.OAuth1UserHandler(
 
 client = tweepy.Client("AAAAAAAAAAAAAAAAAAAAAO42bAEAAAAAOVTkiHTGCVCY5WI557PXbwq7UQ8%3D9vZmiMI98s6tjBRDGWs7GqrEwloYXeC8gl8Id5kmb8U1rynI9e")
 
+
 #
 # api = tweepy.API(auth)
 #
