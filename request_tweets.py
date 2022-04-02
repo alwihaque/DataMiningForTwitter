@@ -39,4 +39,4 @@ with open('tweets.csv', "w") as f:
 
 #parse strings to eliminate punctuation,
 def string_parse():
-
+    return
