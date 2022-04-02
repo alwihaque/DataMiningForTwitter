@@ -10,7 +10,7 @@ print(files)
 
 with open('tweets.csv', "w") as f:
     writer = csv.writer(f)
-    header = ['TweetID', 'Body', 'Likes', 'Retweets']
+    header = ['TweetID', 'body', 'likes', 'retweets', "date", "time"]
     writer.writerow(header)
     for file in files:
         #iterate over every tweet in file (can use pandas) and only include tweets in english
