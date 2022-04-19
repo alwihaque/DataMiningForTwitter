@@ -11,7 +11,6 @@ def main():
     client = tweepy.Client(
         "AAAAAAAAAAAAAAAAAAAAACQGbQEAAAAALeb1NcPRAhWqX7N2VbeFs0wq%2F34%3Dm9x3eYcJY8y79x8zNrWvI0pPSl4f4T4Hpt7CPz2HMaxsYoOdKQ",
     )
-
     subdir = os.listdir('tweetid')
     with open('tweets.csv', "w") as f:
         writer = csv.writer(f)
@@ -37,6 +36,9 @@ def main():
                             if type(tweet_ids) is not int and len(tweet_ids) == 101:
                                 tweet_ids.pop(0)
                             tweet_data = client.get_tweets(tweet_ids)
+                            if tweet_data.data is None:
+                                tweet_ids = []
+                                continue
                             for tweet_d in tweet_data.data:
                                 if tweet_d is None:
                                     continue
