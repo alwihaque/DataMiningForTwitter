@@ -34,7 +34,6 @@ def give_emoji_free_text(text):
     text = text.lower()
     text = re.sub(r"http\S+", "", text)
     text = re.sub("[^a-z0-9@#]"," ", text)
-
     return text
 
 
@@ -78,8 +77,9 @@ def create_candidate_items(k, item_sets):
         return candidate_item_set
 
 
-def apriori_algorithm(input_file, min_sup_count, output_filename):
+def apriori_algorithm(input_file, min_sup_count, output_filename, date):
     data = pd.read_csv(input_file)
+    data = data[data["date"] == date]
     keywords = data.body.tolist()
     item_set = {}
     k = 1
@@ -138,8 +138,5 @@ def apriori_algorithm(input_file, min_sup_count, output_filename):
             f.write("\n")
 
 
-if __name__ == "__main__":
-    text = "The lies they @JoeBIDEN spread are endless 🤦‍♀️ Scientism materialism and the longing for power is what is fueling the lies. https://t.co/NhJ3dMz2ff,2021-12-19,05:05:36"
-    give_emoji_free_text(text)
 
 # apriori_algorithm("tweets.csv", 200, "output.txt")
