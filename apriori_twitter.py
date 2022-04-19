@@ -79,7 +79,7 @@ def give_emoji_free_text(text):
 
 def apriori_algorithm(input_file, threshold, output_filename, date):
     data = pd.read_csv(input_file)
-    data = data[data["date"] == date]
+    # data = data[data["date"] == date]
     data["body"] = data['body'].apply(lambda x: give_emoji_free_text(x))
     # print(data['body'])
     data["keywords"] = data["body"].str.split(" ", -1, False)
@@ -144,10 +144,10 @@ if __name__ == '__main__':
     #date format in 2021-12-10 in csv
     start_date = datetime(2021, 12, 1)
     end_date = datetime(2022, 1, 31)
-
-    for dt in rrule(freq=DAILY,dtstart=start_date, until=end_date):
-        if dt in ignore:
-            continue
-        date = dt.strftime("%Y-%m-%d")
-        apriori_algorithm("tweets.csv", 50, "apr_"+date+".csv", date)
+    apriori_algorithm("tweets.csv", 700, "all_data_apriori.csv", 0)
+    # for dt in rrule(freq=DAILY,dtstart=start_date, until=end_date):
+    #     if dt in ignore:
+    #         continue
+    #     date = dt.strftime("%Y-%m-%d")
+    #     apriori_algorithm("tweets.csv", 50, "apr_"+date+".csv", date)
 
