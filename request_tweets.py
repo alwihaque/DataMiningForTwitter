@@ -2,7 +2,7 @@ import tweepy
 import os
 import pandas as pd
 import csv
-import time
+import time as t
 
 
 def main():
@@ -22,8 +22,6 @@ def main():
             files = os.listdir('tweetid/' + directory)
             for file in files:
                 file_ctr = file_ctr + 1
-                print(file_ctr)
-                print(file)
                 d = pd.read_csv('tweetid/' + directory + '/' + file, sep='\t')
                 data = pd.DataFrame(d)
                 tweets = data.loc[data['lang'] == 'en']
@@ -55,8 +53,8 @@ def main():
                             tweet_ids.append(tweet['tweet_id'])
                         counter = counter + 1
                     except tweepy.errors.TooManyRequests as e:
+                        # check if both are exhausted
                         if kt == 1:
-                            print(str(e) + "here")
                             kt = 0
                             ah = 1
                             client = tweepy.Client(
@@ -64,16 +62,27 @@ def main():
                             # if type(tweet_ids) is int:
                             #     tweet_ids = [tweet_ids]
                             # continue
+                            # request a tweet
+                            try:
+                                tweet = client.get_tweets('1488162730116845569')
+                            except tweepy.errors.TooManyRequests as e:
+                                print('sleeping')
+                                t.sleep(15*60)
+
                         elif ah == 1:
-                            print(str(e))
                             kt = 1
                             ah = 0
                             client = tweepy.Client(
                                 "AAAAAAAAAAAAAAAAAAAAAO42bAEAAAAAOVTkiHTGCVCY5WI557PXbwq7UQ8%3D9vZmiMI98s6tjBRDGWs7GqrEwloYXeC8gl8Id5kmb8U1rynI9e")
+                            try:
+                                tweet = client.get_tweets('1488162730116845569')
+                            except tweepy.errors.TooManyRequests as e:
+                                print('sleeping')
+                                t.sleep(15 * 60)
                             # if type(tweet_ids) is int:
                             #     tweet_ids = [tweet_ids]
                             # continue
-                            
+
 
 
 def string_parse(st):
